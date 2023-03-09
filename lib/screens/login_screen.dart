@@ -143,7 +143,7 @@ class LoginScreen extends StatelessWidget {
         prefixIcon: Icon(prefixIcon, color: iconColor),
         hintText: hintText,
         hintStyle: const TextStyle(
-          color: Colors.white,
+          color: Colors.grey,
         ),
         enabledBorder: const UnderlineInputBorder(
           borderSide: BorderSide(
