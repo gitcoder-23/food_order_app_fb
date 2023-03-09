@@ -1,6 +1,7 @@
 // ignore_for_file: sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
+import 'package:food_order_app_fb/screens/signup_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -17,7 +18,7 @@ class LoginScreen extends StatelessWidget {
             color: Colors.white,
           ),
           onPressed: () {
-            print('Hi');
+            Navigator.of(context).pop();
           },
         ),
       ),
@@ -87,9 +88,6 @@ class LoginScreen extends StatelessWidget {
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(
-                          width: 4,
-                        ),
                       ],
                     ),
                   ],
@@ -98,20 +96,29 @@ class LoginScreen extends StatelessWidget {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
+              children: [
+                const Text(
                   'New User?',
                   style: TextStyle(
                     color: Colors.grey,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
-                Text(
-                  'Please Register Now',
-                  style: TextStyle(
-                    color: Colors.red,
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const SignUpScreen(),
+                      ),
+                    );
+                  },
+                  child: const Text(
+                    'Please Register Now',
+                    style: TextStyle(
+                      color: Colors.red,
+                    ),
                   ),
                 ),
               ],
@@ -128,6 +135,10 @@ class LoginScreen extends StatelessWidget {
     required Color iconColor,
   }) {
     return TextFormField(
+      style: const TextStyle(
+        fontSize: 18.0,
+        color: Colors.white,
+      ),
       decoration: InputDecoration(
         prefixIcon: Icon(prefixIcon, color: iconColor),
         hintText: hintText,

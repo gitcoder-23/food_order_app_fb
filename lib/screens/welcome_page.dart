@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:food_order_app_fb/screens/login_screen.dart';
+import 'package:food_order_app_fb/screens/signup_screen.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -8,8 +10,20 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
-  onBtnPressed() {
-    print('Hi');
+  onBtnPressed(String btnName) {
+    if (btnName == 'Login') {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const LoginScreen(),
+        ),
+      );
+    } else {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => const SignUpScreen(),
+        ),
+      );
+    }
   }
 
   @override
@@ -55,6 +69,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       backgroundColor: Colors.green,
                       shadowColor: Colors.greenAccent,
                       txtColor: Colors.white,
+                      onBtnPressed: onBtnPressed,
                     ),
                   ),
                   SizedBox(
@@ -66,6 +81,7 @@ class _WelcomePageState extends State<WelcomePage> {
                       backgroundColor: Colors.white,
                       shadowColor: Colors.white,
                       txtColor: Colors.green,
+                      onBtnPressed: onBtnPressed,
                     ),
                   ),
                 ],
@@ -83,6 +99,7 @@ class _WelcomePageState extends State<WelcomePage> {
     required Color backgroundColor,
     required Color shadowColor,
     required Color txtColor,
+    required Function onBtnPressed,
   }) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
@@ -97,9 +114,10 @@ class _WelcomePageState extends State<WelcomePage> {
             width: 2,
           ),
         ),
-        // minimumSize: const Size(100, 40),
       ),
-      onPressed: () => onBtnPressed(),
+      onPressed: () {
+        onBtnPressed(btnName);
+      },
       child: Wrap(
         children: [
           Row(
