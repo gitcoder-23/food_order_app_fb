@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "128650950341",
+    "project_id": "flutter-food-order-app-e6de3",
+    "storage_bucket": "flutter-food-order-app-e6de3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128650950341:android:062407b0bda904b0e822ac",
+        "android_client_info": {
+          "package_name": "com.fooddeliverdo.fooddeliverdo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128650950341-kvjd95kfreb7jenfidd8lt413u18rhnj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fooddeliverdo.fooddeliverdo",
+            "certificate_hash": "97950f76ac0d87e3aac7d430f2d7c6e8a4e7a69f"
+          }
+        },
+        {
+          "client_id": "128650950341-2u35q164h53mafs23bv6kbcjvv8b16nh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGFWpuu2ticpx-wqVR3E-Co5BNXt6gqRc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128650950341-2u35q164h53mafs23bv6kbcjvv8b16nh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "128650950341-fvc578qm5k36g35rg51t4puqopnaanqm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fooddeliverdo.fooddeliverdo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

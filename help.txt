@@ -2,8 +2,65 @@
 https://youtube.com/playlist?list=PLC6P77cg6e2itpb8SqiYdrYeffUTyY377
 
 
+
+// JSON To dart
+https://javiercbk.github.io/json_to_dart/
+
+
 // Flutter: Showing SnackBar with ScaffoldMessenger
 https://www.kindacode.com/article/flutter-snackbar/
 
+// Firebase Connect android
+SHA1 Key-> cd android && ./gradlew signingreport
 
-part---> 5
+
+// AAP
+https://stackoverflow.com/questions/65640066/flutter-building-appbundle-in-release-mode
+
+// APK
+https://stackoverflow.com/questions/49695393/how-to-build-apk-create-old-version-app-in-flutter
+
+
+// Process to deploy stores
+flutter clean
+flutter pub get
+cd ios && pod install && cd ..
+
+// Flutter APK && AAP File Build
+cd android && ./gradlew clean && cd ..
+
+
+// For APK
+cd android
+./gradlew app:assembleRelease 
+
+flutter build apk
+
+
+// For AAB
+cd android
+./gradlew bundleRelease
+
+flutter build appbundle
+
+
+
+// Flutter Firebase setup
+https://youtu.be/hgRg9RFvNJQ
+
+// To generate SHA-Key for Android firebase
+cd android -> ./gradlew signingreport -> enter
+
+
+// App Icon generator and App Name (Flutter)
+https://appicon.co/
+https://easyappicon.com/(used)
+t.ly/5gSr
+
+// follow --> https://youtu.be/x1fCROXiSks
+
+part---> 6
+
+com.example.food_order_app_fb
+
+com.fooddeliverdo.fooddeliverdo

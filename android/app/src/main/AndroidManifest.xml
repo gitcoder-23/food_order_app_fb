@@ -1,7 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.food_order_app_fb">
+    package="com.fooddeliverdo.fooddeliverdo">
+
+
+
+    <!-- Add Internet -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+
+
+
    <application
-        android:label="food_order_app_fb"
+        android:label="Fooddeliverdo"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
