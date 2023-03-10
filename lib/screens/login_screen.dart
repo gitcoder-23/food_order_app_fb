@@ -2,13 +2,26 @@
 
 import 'package:flutter/material.dart';
 import 'package:food_order_app_fb/screens/signup_screen.dart';
+import 'package:food_order_app_fb/widget/text_input_field.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
+
+  // work in input field
+  TextEditingController userName = TextEditingController();
+  TextEditingController password = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: globalKey,
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -44,9 +57,11 @@ class LoginScreen extends StatelessWidget {
             Column(
               children: [
                 TextInputField(
-                  hintText: 'Username',
+                  hintText: 'Username/ Email',
                   prefixIcon: Icons.person_outline,
                   iconColor: Colors.white,
+                  textEditingController: userName,
+                  obscureText: false,
                 ),
                 const SizedBox(
                   height: 30,
@@ -55,6 +70,8 @@ class LoginScreen extends StatelessWidget {
                   hintText: 'Password',
                   prefixIcon: Icons.lock_outline,
                   iconColor: Colors.white,
+                  textEditingController: password,
+                  obscureText: true,
                 ),
               ],
             ),
@@ -124,36 +141,6 @@ class LoginScreen extends StatelessWidget {
               ],
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget TextInputField({
-    required String hintText,
-    required IconData prefixIcon,
-    required Color iconColor,
-  }) {
-    return TextFormField(
-      style: const TextStyle(
-        fontSize: 18.0,
-        color: Colors.white,
-      ),
-      decoration: InputDecoration(
-        prefixIcon: Icon(prefixIcon, color: iconColor),
-        hintText: hintText,
-        hintStyle: const TextStyle(
-          color: Colors.grey,
-        ),
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.grey,
-          ),
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.green,
-          ),
         ),
       ),
     );

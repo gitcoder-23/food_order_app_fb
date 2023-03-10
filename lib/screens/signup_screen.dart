@@ -1,12 +1,102 @@
+// ignore_for_file: unnecessary_null_comparison
+
 import 'package:flutter/material.dart';
 import 'package:food_order_app_fb/screens/login_screen.dart';
+import 'package:food_order_app_fb/widget/text_input_field.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
+
+  @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  final GlobalKey<ScaffoldState> globalKey = GlobalKey<ScaffoldState>();
+  final RegExp eRegExp = RegExp(
+      r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$');
+
+  final RegExp pRegExp =
+      RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$');
+
+  // work in input field
+  TextEditingController firstName = TextEditingController();
+  TextEditingController lastName = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController confirmPassword = TextEditingController();
+
+  void validationInput() {
+    if (firstName.text.trim().isEmpty || firstName.text.trim() == null) {
+      // globalKey.currentState;
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("First name is empty"),
+      ));
+      return;
+    }
+    if (lastName.text.trim().isEmpty || lastName.text.trim() == null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Last name is empty"),
+      ));
+      return;
+    }
+    if (email.text.trim().isEmpty || email.text.trim() == null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Email is empty"),
+      ));
+      return;
+    } else if (!eRegExp.hasMatch(email.text)) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Please enter vaild Email"),
+      ));
+
+      return;
+    }
+    if (password.text.trim().isEmpty || password.text.trim() == null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Password is empty"),
+      ));
+      return;
+    } else if (password.text.length < 8) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Password must be 8 character long"),
+      ));
+      return;
+    } else if (!pRegExp.hasMatch(password.text)) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text(
+            "Must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number"),
+      ));
+
+      return;
+    }
+    if (confirmPassword.text.trim().isEmpty ||
+        confirmPassword.text.trim() == null) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Confirm password is empty"),
+      ));
+      return;
+    }
+    if (password.text != confirmPassword.text) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Missmatch password"),
+      ));
+      return;
+    }
+  }
+
+  onBtnPressed(String btnName) {
+    if (btnName == 'Register') {
+      validationInput();
+    } else {
+      print('HI--> cancel');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: globalKey,
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -43,29 +133,39 @@ class SignUpScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextInputField(
-                      hintText: 'Name',
+                      textEditingController: firstName,
+                      hintText: 'First Name',
                       prefixIcon: Icons.person_outline,
                       iconColor: Colors.white,
+                      obscureText: false,
                     ),
                     TextInputField(
-                      hintText: 'User Name',
+                      textEditingController: lastName,
+                      hintText: 'Last Name',
                       prefixIcon: Icons.person_outline,
                       iconColor: Colors.white,
+                      obscureText: false,
                     ),
                     TextInputField(
+                      textEditingController: email,
                       hintText: 'Email',
-                      prefixIcon: Icons.person_outline,
+                      prefixIcon: Icons.email_outlined,
                       iconColor: Colors.white,
+                      obscureText: false,
                     ),
                     TextInputField(
+                      textEditingController: password,
                       hintText: 'Password',
-                      prefixIcon: Icons.person_outline,
+                      prefixIcon: Icons.lock_outline,
                       iconColor: Colors.white,
+                      obscureText: true,
                     ),
                     TextInputField(
+                      textEditingController: confirmPassword,
                       hintText: 'Confirm Password',
-                      prefixIcon: Icons.person_outline,
+                      prefixIcon: Icons.lock_outline,
                       iconColor: Colors.white,
+                      obscureText: true,
                     ),
                   ],
                 ),
@@ -82,6 +182,7 @@ class SignUpScreen extends StatelessWidget {
                       backgroundColor: Colors.grey,
                       shadowColor: Colors.grey,
                       textColor: Colors.black,
+                      onBtnPressed: onBtnPressed,
                     ),
                   ),
                   const SizedBox(
@@ -95,6 +196,7 @@ class SignUpScreen extends StatelessWidget {
                       backgroundColor: Colors.red,
                       shadowColor: Colors.redAccent,
                       textColor: Colors.white,
+                      onBtnPressed: onBtnPressed,
                     ),
                   ),
                 ],
@@ -141,6 +243,7 @@ class SignUpScreen extends StatelessWidget {
     required Color backgroundColor,
     required Color shadowColor,
     required Color textColor,
+    required Function onBtnPressed,
   }) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
@@ -156,7 +259,7 @@ class SignUpScreen extends StatelessWidget {
           // ),
         ),
       ),
-      onPressed: () {},
+      onPressed: () => onBtnPressed(btnName),
       child: Wrap(
         children: [
           Row(
@@ -176,33 +279,33 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  Widget TextInputField({
-    required String hintText,
-    required IconData prefixIcon,
-    required Color iconColor,
-  }) {
-    return TextFormField(
-      style: const TextStyle(
-        fontSize: 18.0,
-        color: Colors.white,
-      ),
-      decoration: InputDecoration(
-        prefixIcon: Icon(prefixIcon, color: iconColor),
-        hintText: hintText,
-        hintStyle: const TextStyle(
-          color: Colors.grey,
-        ),
-        enabledBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.grey,
-          ),
-        ),
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.green,
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget TextInputField({
+  //   required String hintText,
+  //   required IconData prefixIcon,
+  //   required Color iconColor,
+  // }) {
+  //   return TextFormField(
+  //     style: const TextStyle(
+  //       fontSize: 18.0,
+  //       color: Colors.white,
+  //     ),
+  //     decoration: InputDecoration(
+  //       prefixIcon: Icon(prefixIcon, color: iconColor),
+  //       hintText: hintText,
+  //       hintStyle: const TextStyle(
+  //         color: Colors.grey,
+  //       ),
+  //       enabledBorder: const UnderlineInputBorder(
+  //         borderSide: BorderSide(
+  //           color: Colors.grey,
+  //         ),
+  //       ),
+  //       focusedBorder: const UnderlineInputBorder(
+  //         borderSide: BorderSide(
+  //           color: Colors.green,
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }
