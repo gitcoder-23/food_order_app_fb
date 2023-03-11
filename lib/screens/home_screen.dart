@@ -94,6 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
               //   left: 8,
               //   right: 8,
               // ),
+              margin: const EdgeInsets.symmetric(vertical: 10),
               child: GridView.count(
                 shrinkWrap: false,
                 primary: false,
