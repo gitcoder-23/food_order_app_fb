@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 
 Map<int, Color> color = {
-  50: const Color.fromARGB(31, 147, 122, 23),
-  100: const Color.fromARGB(51, 136, 130, 14),
-  200: const Color.fromARGB(75, 136, 124, 14),
-  300: const Color.fromARGB(102, 136, 134, 14),
-  400: const Color.fromARGB(126, 136, 128, 14),
-  500: const Color.fromARGB(153, 136, 134, 14),
-  600: const Color.fromARGB(177, 132, 136, 14),
-  700: const Color.fromARGB(204, 136, 122, 14),
-  800: const Color.fromARGB(228, 217, 213, 10),
-  900: const Color.fromARGB(255, 170, 159, 5),
+  50: const Color.fromARGB(31, 48, 47, 43),
+  100: const Color.fromARGB(51, 41, 41, 35),
+  200: const Color.fromARGB(74, 27, 27, 25),
+  300: const Color.fromARGB(102, 24, 24, 21),
+  400: const Color.fromARGB(125, 22, 22, 16),
+  500: const Color.fromARGB(153, 29, 29, 19),
+  600: const Color.fromARGB(176, 25, 25, 18),
+  700: const Color.fromARGB(204, 16, 15, 9),
+  800: const Color.fromARGB(227, 16, 16, 3),
+  900: const Color.fromARGB(255, 0, 0, 0),
 };
 
-MaterialColor primeColor = MaterialColor(0xffd1ad17, color);
+MaterialColor primeColor = MaterialColor(0xff121008, color);
 
 Color primaryColor = const Color.fromARGB(255, 49, 134, 7);
 Color headerColor = const Color(0xFFD6B738);
-Color scaffoldBackgroundColor = const Color.fromARGB(255, 7, 6, 6);
+Color appBarThemeColor = const Color(0xff2b2b2b);
+Color scaffoldBackgroundColor = const Color(0xff2b2b2b);
 Color textColor = Colors.black87;
 Color kWhite = Colors.white;
 Color kGrey = const Color.fromARGB(255, 116, 114, 114);
