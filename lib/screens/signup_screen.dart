@@ -120,9 +120,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
         content: Text("New user created"),
       ));
       Timer(
-        const Duration(seconds: 2),
+        const Duration(seconds: 1),
         () {
           clearTextField();
+
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => const LoginScreen(),
+            ),
+          );
         },
       );
     } on FirebaseAuthException catch (e) {
