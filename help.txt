@@ -1,7 +1,7 @@
 // You-Tut
 https://youtube.com/playlist?list=PLC6P77cg6e2itpb8SqiYdrYeffUTyY377
 
-
+using this video FB setup- vid--6
 
 // JSON To dart
 https://javiercbk.github.io/json_to_dart/
@@ -64,3 +64,11 @@ part---> 6
 com.example.food_order_app_fb
 
 com.fooddeliverdo.fooddeliverdo
+
+
+// For firebase development site
+https://firebase.flutter.dev/docs/overview
+
+
+// RN firebase
+https://rnfirebase.io/

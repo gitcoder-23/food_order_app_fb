@@ -1,5 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
-
+import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_order_app_fb/screens/login_screen.dart';
 import 'package:food_order_app_fb/widget/text_input_field.dart';
@@ -18,6 +20,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   final RegExp pRegExp =
       RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,}$');
+
+  bool loading = false;
+  UserCredential? userCredential;
 
   // work in input field
   TextEditingController firstName = TextEditingController();
@@ -82,14 +87,92 @@ class _SignUpScreenState extends State<SignUpScreen> {
         content: Text("Missmatch password"),
       ));
       return;
+    } else {
+      signUpSubmit();
     }
+  }
+
+  Future<dynamic> signUpSubmit() async {
+    setState(() {
+      loading = true;
+    });
+
+    try {
+      final userCredential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email.text,
+        password: password.text,
+      );
+      await FirebaseFirestore.instance
+          .collection('userData')
+          .doc(userCredential.user!.uid)
+          .set({
+        'firstName': firstName.text.trim(),
+        'lastName': lastName.text.trim(),
+        'email': email.text.trim(),
+        "userid": userCredential.user!.uid,
+        'password': password.text.trim(),
+      });
+      setState(() {
+        loading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("New user created"),
+      ));
+      Timer(
+        const Duration(seconds: 2),
+        () {
+          clearTextField();
+        },
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        // print('The password provided is too weak.');
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("The password provided is too weak"),
+        ));
+      } else if (e.code == 'email-already-in-use') {
+        // print('The account already exists for that email.');
+
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("The account already exists for that email"),
+        ));
+      }
+    } catch (e) {
+      // print(e);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(e.toString()),
+      ));
+      setState(() {
+        loading = false;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    firstName.dispose();
+    lastName.dispose();
+    email.dispose();
+    password.dispose();
+    confirmPassword.dispose();
+    super.dispose();
+  }
+
+  clearTextField() {
+    firstName.clear();
+    lastName.clear();
+    email.clear();
+    password.clear();
+    confirmPassword.clear();
   }
 
   onBtnPressed(String btnName) {
     if (btnName == 'Register') {
       validationInput();
     } else {
-      print('HI--> cancel');
+      clearTextField();
     }
   }
 
@@ -170,37 +253,46 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ],
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 120,
-                    child: DynaButton(
-                      btnName: 'Cancel',
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.grey,
-                      shadowColor: Colors.grey,
-                      textColor: Colors.black,
-                      onBtnPressed: onBtnPressed,
+              loading
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        CircularProgressIndicator(
+                          color: Colors.white70,
+                        )
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 120,
+                          child: DynaButton(
+                            btnName: 'Cancel',
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.grey,
+                            shadowColor: Colors.grey,
+                            textColor: Colors.black,
+                            onBtnPressed: onBtnPressed,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 30,
+                        ),
+                        SizedBox(
+                          width: 120,
+                          child: DynaButton(
+                            btnName: 'Register',
+                            foregroundColor: Colors.white,
+                            backgroundColor: Colors.red,
+                            shadowColor: Colors.redAccent,
+                            textColor: Colors.white,
+                            onBtnPressed: onBtnPressed,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(
-                    width: 30,
-                  ),
-                  SizedBox(
-                    width: 120,
-                    child: DynaButton(
-                      btnName: 'Register',
-                      foregroundColor: Colors.white,
-                      backgroundColor: Colors.red,
-                      shadowColor: Colors.redAccent,
-                      textColor: Colors.white,
-                      onBtnPressed: onBtnPressed,
-                    ),
-                  ),
-                ],
-              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
