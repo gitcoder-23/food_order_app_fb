@@ -1,5 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
 import 'dart:async';
+import 'dart:convert';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -111,7 +113,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         'lastName': lastName.text.trim(),
         'email': email.text.trim(),
         "userid": userCredential.user!.uid,
-        'password': password.text.trim(),
+        'password': base64Url.encode(utf8.encode(password.text.trim())),
+        // 'password': password.text.trim(),
       });
       setState(() {
         loading = false;

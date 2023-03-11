@@ -72,3 +72,13 @@ https://firebase.flutter.dev/docs/overview
 
 // RN firebase
 https://rnfirebase.io/
+
+
+// Password base64 protected
+https://stackoverflow.com/questions/56201074/how-to-encode-and-decode-base64-and-base64url-in-flutter-dart
+
+
+
+
+
+
