@@ -2,6 +2,7 @@
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:food_order_app_fb/components/navigationMenu/drawer_menu.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,9 +15,23 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: const Color(0xff2b2b2b),
+      drawer: const DrawerMenu(),
       appBar: AppBar(
         elevation: 0.0,
-        leading: const Icon(Icons.sort),
+        // leading: const Icon(Icons.sort),
+        // by using custom icon and call darwer
+        leading: Builder(
+          builder: (BuildContext context) => IconButton(
+            icon: const Icon(
+              Icons.sort,
+              // color: Colors.red,
+            ),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+            // tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+          ),
+        ),
+
         actions: [
           Container(
             width: 60,

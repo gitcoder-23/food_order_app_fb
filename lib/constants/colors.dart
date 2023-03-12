@@ -13,9 +13,10 @@ Map<int, Color> color = {
   900: const Color.fromARGB(255, 0, 0, 0),
 };
 
-MaterialColor primeColor = MaterialColor(0xff121008, color);
+MaterialColor primeColor = MaterialColor(0xff2b2b2b, color);
 
-Color primaryColor = const Color.fromARGB(255, 49, 134, 7);
+// Color primaryColor = const Color.fromARGB(255, 49, 134, 7);
+Color primaryColor = const Color(0xff2b2b2b);
 Color headerColor = const Color(0xFFD6B738);
 Color appBarThemeColor = const Color(0xff2b2b2b);
 Color scaffoldBackgroundColor = const Color(0xff2b2b2b);

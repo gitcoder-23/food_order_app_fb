@@ -26,8 +26,8 @@ class MyApp extends StatelessWidget {
       title: 'Food Order App',
       theme: ThemeData(
         // primarySwatch: Colors.blue,
-        // primarySwatch: primeColor,
-        // primaryColor: primaryColor,
+        primarySwatch: primeColor,
+        primaryColor: primaryColor,
         scaffoldBackgroundColor: scaffoldBackgroundColor,
         appBarTheme: AppBarTheme(
           color: appBarThemeColor,
