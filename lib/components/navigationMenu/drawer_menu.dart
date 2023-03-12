@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class DrawerMenu extends StatelessWidget {
@@ -34,18 +35,22 @@ class DrawerMenu extends StatelessWidget {
               drawerListMenu(
                 menuName: 'Profile',
                 menuIcon: Icons.person,
+                onTapMenu: () {},
               ),
               drawerListMenu(
                 menuName: 'Cart',
                 menuIcon: Icons.add_shopping_cart,
+                onTapMenu: () {},
               ),
               drawerListMenu(
                 menuName: 'Order',
                 menuIcon: Icons.shop,
+                onTapMenu: () {},
               ),
               drawerListMenu(
                 menuName: 'About',
                 menuIcon: Icons.info,
+                onTapMenu: () {},
               ),
               const Divider(
                 thickness: 2,
@@ -63,10 +68,14 @@ class DrawerMenu extends StatelessWidget {
               drawerListMenu(
                 menuName: 'Change',
                 menuIcon: Icons.lock,
+                onTapMenu: () {},
               ),
               drawerListMenu(
                 menuName: 'Log Out',
                 menuIcon: Icons.exit_to_app,
+                onTapMenu: () async {
+                  await FirebaseAuth.instance.signOut();
+                },
               ),
             ],
           ),
@@ -78,8 +87,10 @@ class DrawerMenu extends StatelessWidget {
   Widget drawerListMenu({
     required String menuName,
     required IconData menuIcon,
+    required Function onTapMenu,
   }) {
     return ListTile(
+      onTap: onTapMenu ?? onTapMenu(),
       leading: Icon(
         menuIcon,
         color: Colors.white,

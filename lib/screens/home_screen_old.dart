@@ -3,39 +3,22 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:food_order_app_fb/components/navigationMenu/drawer_menu.dart';
-import 'package:food_order_app_fb/providers/ProductProvider.dart';
-import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomeScreenOld extends StatefulWidget {
+  const HomeScreenOld({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreenOld> createState() => _HomeScreenOldState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenOldState extends State<HomeScreenOld> {
   @override
   void initState() {
-    getProductCategory();
     super.initState();
-  }
-
-  getProductCategory() async {
-    ProductProvider productProvider =
-        Provider.of<ProductProvider>(context, listen: false);
-
-    if (mounted) {
-      productProvider.fetchProductCategories();
-    } else {
-      await Future.delayed(const Duration(milliseconds: 1000));
-      getProductCategory();
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    ProductProvider productProvider = Provider.of<ProductProvider>(context);
-
     return Scaffold(
       backgroundColor: const Color(0xff2b2b2b),
       drawer: const DrawerMenu(),
@@ -73,6 +56,12 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            // InkWell(
+            //   onTap: () async {
+            //     await FirebaseAuth.instance.signOut();
+            //   },
+            //   child:  Text('Logout'),
+            // ),
             TextField(
               cursorColor: Colors.amber,
               decoration: InputDecoration(
@@ -94,14 +83,31 @@ class _HomeScreenState extends State<HomeScreen> {
               scrollDirection: Axis.horizontal,
               dragStartBehavior: DragStartBehavior.start,
               child: Row(
-                children: productProvider.getProductCategoryList.map((cData) {
-                  return CategoryContainer(
-                    categoryImage: cData.image.toString(),
-                    categoryName: cData.name.toString(),
-                  );
-                }).toList(),
+                children: [
+                  CategoryContainer(
+                    categoryImage: 'assets/images/1.png',
+                    categoryName: 'All',
+                  ),
+                  CategoryContainer(
+                    categoryImage: 'assets/images/2.png',
+                    categoryName: 'Burger',
+                  ),
+                  CategoryContainer(
+                    categoryImage: 'assets/images/3.png',
+                    categoryName: 'Recipe',
+                  ),
+                  CategoryContainer(
+                    categoryImage: 'assets/images/4.png',
+                    categoryName: 'Pizza',
+                  ),
+                  CategoryContainer(
+                    categoryImage: 'assets/images/5.png',
+                    categoryName: 'Drink',
+                  ),
+                ],
               ),
             ),
+
             Container(
               height: 510,
               // margin: const EdgeInsets.only(
@@ -240,8 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
           width: 80,
           decoration: BoxDecoration(
             image: DecorationImage(
-              // image: AssetImage(categoryImage),
-              image: NetworkImage(categoryImage),
+              image: AssetImage(categoryImage),
             ),
             color: Colors.grey,
             borderRadius: BorderRadius.circular(10),

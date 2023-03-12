@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:food_order_app_fb/screens/home_screen.dart';
 import 'package:food_order_app_fb/screens/signup_screen.dart';
 import 'package:food_order_app_fb/screens/welcome_page.dart';
 import 'package:food_order_app_fb/widget/text_input_field.dart';
@@ -104,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => const WelcomePage(),
+              builder: (context) => const HomeScreen(),
             ),
           );
         },
@@ -182,6 +183,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   iconColor: Colors.white,
                   textEditingController: email,
                   obscureText: false,
+                  cursorColor: Colors.white,
                 ),
                 const SizedBox(
                   height: 30,
@@ -192,6 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   iconColor: Colors.white,
                   textEditingController: password,
                   obscureText: true,
+                  cursorColor: Colors.white,
                 ),
               ],
             ),

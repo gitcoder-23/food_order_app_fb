@@ -4,6 +4,7 @@ class TextInputField extends StatelessWidget {
   final String hintText;
   final IconData prefixIcon;
   final Color iconColor;
+  final Color cursorColor;
   final bool obscureText;
   final TextEditingController textEditingController;
 
@@ -11,6 +12,7 @@ class TextInputField extends StatelessWidget {
     required this.hintText,
     required this.prefixIcon,
     required this.iconColor,
+    required this.cursorColor,
     required this.obscureText,
     required this.textEditingController,
     super.key,
@@ -19,6 +21,7 @@ class TextInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      cursorColor: cursorColor,
       controller: textEditingController,
       obscureText: obscureText,
       style: const TextStyle(

@@ -230,6 +230,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       prefixIcon: Icons.person_outline,
                       iconColor: Colors.white,
                       obscureText: false,
+                      cursorColor: Colors.white,
                     ),
                     TextInputField(
                       textEditingController: lastName,
@@ -237,6 +238,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       prefixIcon: Icons.person_outline,
                       iconColor: Colors.white,
                       obscureText: false,
+                      cursorColor: Colors.white,
                     ),
                     TextInputField(
                       textEditingController: email,
@@ -244,6 +246,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       prefixIcon: Icons.email_outlined,
                       iconColor: Colors.white,
                       obscureText: false,
+                      cursorColor: Colors.white,
                     ),
                     TextInputField(
                       textEditingController: password,
@@ -251,6 +254,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       prefixIcon: Icons.lock_outline,
                       iconColor: Colors.white,
                       obscureText: true,
+                      cursorColor: Colors.white,
                     ),
                     TextInputField(
                       textEditingController: confirmPassword,
@@ -258,6 +262,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       prefixIcon: Icons.lock_outline,
                       iconColor: Colors.white,
                       obscureText: true,
+                      cursorColor: Colors.white,
                     ),
                   ],
                 ),
