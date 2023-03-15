@@ -26,6 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (mounted) {
       productProvider.fetchProductCategories();
+      productProvider.fetchProducts();
     } else {
       await Future.delayed(const Duration(milliseconds: 1000));
       getProductCategory();
@@ -116,38 +117,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 childAspectRatio: 0.8,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
-                children: [
-                  BottomFoodContainer(
-                    foodImage: 'assets/images/3.png',
-                    foodName: 'Burger',
-                    foodPrice: '123',
-                  ),
-                  BottomFoodContainer(
-                    foodImage: 'assets/images/3.png',
-                    foodName: 'Burger',
-                    foodPrice: '123',
-                  ),
-                  BottomFoodContainer(
-                    foodImage: 'assets/images/3.png',
-                    foodName: 'Burger',
-                    foodPrice: '123',
-                  ),
-                  BottomFoodContainer(
-                    foodImage: 'assets/images/3.png',
-                    foodName: 'Burger',
-                    foodPrice: '123',
-                  ),
-                  BottomFoodContainer(
-                    foodImage: 'assets/images/3.png',
-                    foodName: 'Burger',
-                    foodPrice: '123',
-                  ),
-                  BottomFoodContainer(
-                    foodImage: 'assets/images/3.png',
-                    foodName: 'Burger',
-                    foodPrice: '123',
-                  ),
-                ],
+                children: productProvider.getProductList.map((pData) {
+                  return BottomFoodContainer(
+                    foodImage: pData.image.toString(),
+                    foodName: pData.name.toString(),
+                    foodPrice: pData.price,
+                  );
+                }).toList(),
               ),
             ),
           ],
@@ -159,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget BottomFoodContainer({
     required String foodImage,
     required String foodName,
-    required String foodPrice,
+    required int foodPrice,
   }) {
     return Container(
       height: 270,
@@ -173,7 +149,8 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           CircleAvatar(
             radius: 60,
-            backgroundImage: AssetImage(foodImage),
+            // backgroundImage: AssetImage(foodImage),
+            backgroundImage: NetworkImage(foodImage),
           ),
           ListTile(
             leading: Text(
