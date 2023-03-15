@@ -39,7 +39,7 @@ class ProductProvider with ChangeNotifier {
       // print('@@Fetch.ProductCategoryList--> $productCategoryModel');
       newProductCategoryList.add(productCategoryModel);
     }
-    // productCategoryList = newProductCategoryList;
+
     productCategoryList = newProductCategoryList;
     notifyListeners();
   }
@@ -66,6 +66,7 @@ class ProductProvider with ChangeNotifier {
         productId: element.get('productId'),
       );
       print('@@Fetch.ProductList--> $productModel');
+
       newProductList.add(productModel);
     }
 

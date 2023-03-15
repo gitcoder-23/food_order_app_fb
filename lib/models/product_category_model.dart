@@ -1,7 +1,7 @@
 class ProductCategoryModel {
   String? image;
   String? name;
-  String? categoryId;
+  int? categoryId;
 
   ProductCategoryModel({
     this.image,
